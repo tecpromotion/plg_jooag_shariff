@@ -8,13 +8,10 @@ use Zend\Cache\Storage\StorageInterface;
 use Zend\Cache\StorageFactory;
 
 /**
- * Implement ZendCache
- *
- * @package Heise\Shariff
+ * Implement ZendCache.
  */
 class ZendCache implements CacheInterface
 {
-
     /**
      * @var StorageInterface
      */
@@ -22,12 +19,12 @@ class ZendCache implements CacheInterface
 
     /**
      * @param array $configuration
+     *
      * @throws \Zend\Cache\Exception\InvalidArgumentException
      * @throws \Zend\Cache\Exception\RuntimeException
      */
     public function __construct(array $configuration)
     {
-
         if (!isset($configuration['adapter'])) {
             $configuration['adapter'] = 'Filesystem';
         }
@@ -38,9 +35,9 @@ class ZendCache implements CacheInterface
 
         $cache = StorageFactory::factory([
             'adapter' => [
-                'name' => $configuration['adapter'],
-                'options' => $configuration['adapterOptions']
-            ]
+                'name'    => $configuration['adapter'],
+                'options' => $configuration['adapterOptions'],
+            ],
         ]);
 
         $options = $cache->getOptions();
@@ -67,11 +64,7 @@ class ZendCache implements CacheInterface
     }
 
     /**
-     * Set cache entry
-     *
-     * @param string $key
-     * @param string $content
-     * @return void
+     * {@inheritdoc}
      */
     public function setItem($key, $content)
     {
@@ -79,10 +72,7 @@ class ZendCache implements CacheInterface
     }
 
     /**
-     * Get cache entry
-     *
-     * @param string $key
-     * @return string
+     * {@inheritdoc}
      */
     public function getItem($key)
     {
@@ -90,10 +80,7 @@ class ZendCache implements CacheInterface
     }
 
     /**
-     * Check if cache entry exists
-     *
-     * @param string $key
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasItem($key)
     {
