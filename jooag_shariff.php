@@ -6,6 +6,11 @@
  * @copyright  Copyright (c) 2009 - 2015 Joomla-Agentur All rights reserved.
  * @license    GNU General Public License version 2 or later;
  * @description A small Plugin to share Social Links without compromising their privacy!
+ * # JoomlaEvents
+ * ## Plugin Access
+ * ### Output Position
+ * #### Output Generation
+ * ##### Backend
  **/
 defined('_JEXEC') or die;
 
@@ -32,18 +37,14 @@ class plgSystemJooag_Shariff extends JPlugin
 	 * @return  string
 	 **/
 	public function onContentBeforeDisplay($context, &$article, &$params, $page = 0)
-	{		
-		$app = JFactory::getApplication();
-
-		if($context == 'com_content.article' AND $app->isSite() AND ($this->params->get('com_content_output') == 1 OR $this->params->get('com_content_output') == 3))
+	{
+		if($this->getAccessGeneral($context, $article, 'top') == 1)
 		{
-			$article->introtext = str_replace('{noshariff}', '', $article->introtext, $stringCount);
-	
-			$config['shorttag'] = 0;
+			str_replace('{noshariff}', '', $article->introtext, $stringCount);
 			
 			if($stringCount == 0)
 			{
-				return $this->getOutputPosition($article, $config = array());
+				return $this->generateHTML($config = array());
 			}
 		}
 	}
@@ -59,75 +60,37 @@ class plgSystemJooag_Shariff extends JPlugin
 	 * @return  string
 	 **/
 	public function onContentAfterDisplay($context, &$article, &$params, $page = 0)
-	{
-		$app = JFactory::getApplication();
-			
-		if($context == 'com_content.article' AND $app->isSite() AND ($this->params->get('com_content_output') == 2 OR $this->params->get('com_content_output') == 3))
+	{			
+		if($this->getAccessGeneral($context, $article, 'bottom') == 1)
 		{
-			$article->introtext = str_replace('{noshariff}', '', $article->introtext, $stringCount);
-			
-			$config['shorttag'] = 0;
+			str_replace('{noshariff}', '', $article->introtext, $stringCount);
 			
 			if($stringCount == 0)
 			{
-				return $this->getOutputPosition($article, $config = array());
+				return $this->generateHTML($config = array());
 			}
 		}
 	}
 
-	/**
-	 * Place shariff in your aticles and modules via {shariff} shorttag
-	 **/
-	public function onContentPrepare($context, &$article, &$params, $page = 0)
-	{
-		$app = JFactory::getApplication();
-		
-		if(preg_match_all('/{shariff\ ([^}]+)\}|\{shariff\}/', $article->text, $matches) and $app->isSite())
-		{
-			$params = explode(' ', trim($matches[0][0],'}'));
-			$config = array ();
-
-			foreach ($params as $key => $item)
-			{
-				if($key != 0)
-				{
-					list($k, $v) = explode("=", $item);
-					$config[ $k ] = $v;
-				}
-			}
-			
-			$this->params->get('shorttag_use') ? $config['shorttag'] = 1 : $config['shorttag'] = 0;
-
-			$article->text = str_replace($matches[0][0], $this->getOutputPosition($article, $config), $article->text);
-		}
-		
-		if($context == 'mod_articles_news.content'){
-			$article->text .= '{noshariff}';
-		}
-	}
-
-	
+	//Show Everywhere
 	public function onBeforeRender()
 	{
-		$app = JFactory::getApplication();
-		
-		if($this->params->get('shariff_where_output') == 2 and $app->isSite())
+		if($this->params->get('output_everywhere') == 1)
 		{
 			$doc = JFactory::getDocument();
-			$config['shorttag'] = 0;
 			$buffer = $doc->getBuffer('component');
 			$buffering = '';
 			
-			if($this->getMenuAccess() == 1 and ($this->params->get('shariff_position_output') == 1 or $this->params->get('shariff_position_output') == 3))
+			if($this->getAccessGeneral('com_everywhere', '', 'top') == 1)
 			{
-				$buffering .= $this->getOutput($config);
+				$buffering .= $this->generateHTML($config = array());
 			}
 			
 			$buffering .= $buffer;
 			
-			if($this->getMenuAccess() == 1 and ($this->params->get('shariff_position_output') == 2 or $this->params->get('shariff_position_output') == 3))
+			if($this->getAccessGeneral('com_everywhere', '', 'bottom') == 1)
 			{
-				$buffering .= $this->getOutput($config);
+				$buffering .= $this->generateHTML($config = array());
 			}
 
 			$doc->setBuffer($buffering, 'component');
@@ -135,61 +98,91 @@ class plgSystemJooag_Shariff extends JPlugin
 	}
 	
 	/**
-	 * appends the required scripts to the documents and returns the markup
-	 *
-	 * @param   mixed    &$article  An object with a "text" property
-	 *
-	 * @return string
+	 * Place shariff in your aticles and modules via {shariff} shorttag
 	 **/
-	public function getOutputPosition($article, $config)
-	{
-
-		//Check for Com_Content Category
-		$catIds = (array)$this->params->get('content_showbycategory');
-		
-		$this->params->get('com_content_category_access') == 0 ? $contentCategoryAccess = 0 : '';
-		$this->params->get('com_content_category_access') == 1 ? $contentCategoryAccess = 1 : '';
-
-		if($this->params->get('com_content_category_access') == 2)
+	public function onContentPrepare($context, &$article, &$params, $page = 0)
+	{		
+		if($this->getAccessGeneral($context, $article, 'com_everywhere') == 1)
 		{
-			$contentCategoryAccess = 0;
-			isset($article->catid) and in_array($article->catid, $catIds) ? $contentCategoryAccess = 1 : '';
-		}
-		
-		if($this->params->get('com_content_category_access') == 3)
-		{
-			$contentCategoryAccess = 1;
-			isset($article->catid) and in_array($article->catid, $catIds) ? $contentCategoryAccess = 0 : '';
-		}
-		//END
+			if(preg_match_all('/{shariff\ ([^}]+)\}|\{shariff\}/', $article->text, $matches))
+			{
+				$params = explode(' ', trim($matches[0][0],'}'));
+				$config = array ();
+
+				foreach ($params as $key => $item)
+				{
+					if($key != 0)
+					{
+						list($k, $v) = explode("=", $item);
+						$config[ $k ] = $v;
+					}
+				}
+				
+				$this->params->get('shorttag_use') ? $config['shorttag'] = 1 : $config['shorttag'] = 0;
+
+				$article->text = str_replace($matches[0][0], $this->generateHTML($config), $article->text);
+			}
 			
-		!isset($config['shorttag']) ? $config['shorttag'] = 0 : '';
-		
-		//Show
-		if($this->getMenuAccess() == 1 and ($contentCategoryAccess == 1 or $config['shorttag'] == '1'))
-		{
-			return $this->getOutput($config);
+			if($context == 'mod_articles_news.content'){
+				$article->text .= '{noshariff}';
+			}
 		}
 	}
+
+
 	
-	private function getMenuAccess()
+	//###############Access::Section->START
+	private function getAccessGeneral($context, $article, $position)
 	{
-		//Check for Menu Item has the highest priority
+		$app = JFactory::getApplication();
+		$access = 0;
+		
+		if($app->isSite())
+		{
+			if($this->params->get('output_position') == $position or $this->params->get('output_position') == 'both')
+			{	
+				if($this->params->get('com_content') == 1)
+				{
+					if($this->getAccessComContent($context ,$article) == 1 or $this->getAccessMenu($context, $article) == 1)
+					{
+						if($context ==  $this->params->get('com_content_views_articles') or $context ==  $this->params->get('com_content_views_categories'))
+						{
+							$access = 1;
+						}
+					}
+				}
+				
+				if($this->params->get('com_everywhere') == 1)
+				{
+					if($this->getAccessMenu('com_everywhere.placeholder' ,$article) == 1)
+					{
+						$access = 1;
+					}
+				}
+			}
+		}
+
+		return $access;
+	}
+	
+	private function getAccessMenu($context)
+	{
 		$app = JFactory::getApplication();
 		$menu = $app->getMenu()->getActive();
-		$menuIds = (array)$this->params->get('content_showbymenu');
+		$menuIds = (array)$this->params->get('com_content_menu_select');
 		is_object($menu) ? $actualMenuId = $menu->id : $actualMenuId = $app->input->getInt('Itemid', 0);
+		$context = explode('.', $context);
+
+		$this->params->get($context[0].'_menu_assignment') == 0 ? $menuAccess = 0 : '';
+		$this->params->get($context[0].'_menu_assignment') == 1 ? $menuAccess = 1 : '';
 		
-		$this->params->get('menu_access') == 0 ? $menuAccess = 0 : '';
-		$this->params->get('menu_access') == 1 ? $menuAccess = 1 : '';
-		
-		if($this->params->get('menu_access') == 2)
+		if($this->params->get($context[0].'_menu_assignment') == 2)
 		{
 			$menuAccess = 0;
 			in_array($actualMenuId, $menuIds) ? $menuAccess = 1 : '';
 		}
 		
-		if($this->params->get('menu_access') == 3)
+		if($this->params->get($context[0].'_menu_assignment') == 3)
 		{
 			$menuAccess = 1;
 			in_array($actualMenuId, $menuIds) ? $menuAccess = 0 : '';
@@ -197,11 +190,33 @@ class plgSystemJooag_Shariff extends JPlugin
 		
 		return $menuAccess;
 	}
+	
+	private function getAccessComContent($context, $article)
+	{
+		$catIds = (array)$this->params->get('com_content_category_select');
+		$this->params->get('com_content_category_assignment') == 0 ? $comContentAccess = 0 : '';
+		$this->params->get('com_content_category_assignment') == 1 ? $comContentAccess = 1 : '';
+		
+		if($this->params->get('com_content_category_assignment') == 2)
+		{
+			$comContentAccess = 0;
+			isset($article->catid) and in_array($article->catid, $catIds) ? $comContentAccess = 1 : '';
+		}
 
+		if($this->params->get('com_content_category_assignment') == 3)
+		{
+			$comContentAccess = 1;
+			isset($article->catid) and in_array($article->catid, $catIds) ? $comContentAccess = 0 : '';
+		}
+
+		return $comContentAccess;
+	}
+	//###############Access::Section->END
+	
 	/**
 	 * Shariff output generation
 	 **/
-	public function getOutput($config)
+	public function generateHTML($config) //for shorttag
 	{
 		$doc = JFactory::getDocument();
 		JHtml::_('jquery.framework');
@@ -226,7 +241,7 @@ class plgSystemJooag_Shariff extends JPlugin
 				
 		foreach ($services as $key => $service)
 		{
-			$this->params->get('shariff_'.$service) ? $activeServices[$service][] = $this->params->get('shariff_'.$service.'_ordering') : '';
+			$this->params->get($service) ? $activeServices[$service][] = $this->params->get($service.'_ordering') : '';
 		}
 		
 		array_multisort($activeServices);
@@ -296,7 +311,7 @@ class plgSystemJooag_Shariff extends JPlugin
 			{
 				$data->services[] = $this->params->get('shariff_'.$service);
 			}
-			//Delete unuses services
+			//Delete unused services
 			$data->services = array_diff($data->services, array('0'));
 						
 			if($params->fb_app_id and $params->fb_secret)
