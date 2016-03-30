@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>info@joomla-agentur.de</authorEmail>
 	<authorUrl>www.joomla-agentur.de</authorUrl>
-	<version>3.2.10</version>
+	<version>3.3.0-Beta1</version>
 	<description>PLG_JOOAG_SHARIFF_XML_DESCRIPTION</description>
 
 	<scriptfile>script.jooag_shariff.php</scriptfile>
@@ -38,129 +38,131 @@
 		<fields name="params">
 			<fieldset name="PLG_JOOAG_SHARIFF_SETTINGS" addfieldpath="/plugins/system/jooag_shariff/fields">
 				<field type="jooagsystem" name="jooagsystem" />
+				
+				<field name="twitter_line" type="line" />
 				<field name="twitter" label="PLG_JOOAG_SHARIFF_TWITTER_NAME" type="radio" class="btn-group" default="Twitter" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Twitter">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="twitter_ordering" showon="shariff_twitter:Twitter" type="integer" default="1" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="twitter_via" showon="shariff_twitter:Twitter" type="input" label="PLG_JOOAG_SHARIFF_TWITTER_VIA"/>
-				<field type="line" name="line1" />
+				<field name="twitter_ordering" showon="twitter:Twitter" type="integer" default="1" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
+				<field name="twitter_via" showon="twitter:Twitter" type="input" label="PLG_JOOAG_SHARIFF_TWITTER_VIA"/>
 				
+				<field name="facebook_line" type="line" />
 				<field name="facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_NAME" type="radio" class="btn-group" default="Facebook" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Facebook">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="facebook_ordering" showon="shariff_facebook:Facebook" type="integer" default="2" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="fb_secret" showon="shariff_facebook:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_SECRET"/>
-				<field name="fb_app_id" showon="shariff_facebook:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_APP_ID"/>
-				<field type="spacer" showon="shariff_facebook:Facebook" name="spacer_LABEL_FB_API" label="PLG_JOOAG_SHARIFF_FACEBOOK_API_DESC" class="alert alert-info" />
-				<field type="line" name="line2" />
+				<field name="facebook_ordering" showon="facebook:Facebook" type="integer" default="2" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
+				<field name="fb_secret" showon="facebook:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_SECRET"/>
+				<field name="fb_app_id" showon="facebook:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_APP_ID"/>
+				<field name="spacer_LABEL_FB_API" type="spacer" showon="facebook:Facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_API_DESC" class="alert alert-info" />
 				
+				<field name="googleplus_line" type="line" />
 				<field name="googleplus" label="PLG_JOOAG_SHARIFF_GOOGLE_PLUS_NAME" type="radio" class="btn-group" default="GooglePlus" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="GooglePlus">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="googleplus_ordering" showon="shariff_googleplus:GooglePlus" type="integer" default="3" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line3" />
+				<field name="googleplus_ordering" showon="googleplus:GooglePlus" type="integer" default="3" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="linkedin_line" type="line" />
 				<field name="linkedin" label="PLG_JOOAG_SHARIFF_LINKEDIN_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="LinkedIn">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="linkedin_ordering" showon="shariff_linkedin:LinkedIn" type="integer" default="4" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line4" />
+				<field name="linkedin_ordering" showon="linkedin:LinkedIn" type="integer" default="4" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="pinterest_line" type="line" />
 				<field name="pinterest" label="PLG_JOOAG_SHARIFF_PINTEREST_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Pinterest">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="pinterest_ordering" showon="shariff_pinterest:Pinterest" type="integer" default="5" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line5" />
+				<field name="pinterest_ordering" showon="pinterest:Pinterest" type="integer" default="5" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="xing_line" type="line" />
 				<field name="xing" label="PLG_JOOAG_SHARIFF_XING_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Xing">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="xing_ordering" showon="shariff_xing:Xing" type="integer" default="6" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line6" />
+				<field name="xing_ordering" showon="xing:Xing" type="integer" default="6" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="whatsapp_line" type="line" />
 				<field name="whatsapp" label="PLG_JOOAG_SHARIFF_WHATSAPP_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Whatsapp">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="whatsapp_ordering" showon="shariff_whatsapp:Whatsapp" type="integer" default="7" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line7" />
+				<field name="whatsapp_ordering" showon="whatsapp:Whatsapp" type="integer" default="7" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field  name="mail_line" type="line" />
 				<field name="mail" label="PLG_JOOAG_SHARIFF_MAIL_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Mail">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="mail_ordering" showon="shariff_mail:Mail" type="integer" default="8" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="data_mail_url" showon="shariff_mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_RECIPIENT" />
-				<field name="data-mail-subject" showon="shariff_mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_SUBJECT" />
-				<field name="data-mail-body" showon="shariff_mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_BODY" />
-				<field type="spacer" showon="shariff_mail:Mail" name="data-mail-spacer" label="PLG_JOOAG_SHARIFF_MAIL_DESC" class="alert alert-error" />
-				<field type="line" name="line8" />
+				<field name="mail_ordering" showon="mail:Mail" type="integer" default="8" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
+				<field name="data_mail_url" showon="mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_RECIPIENT" />
+				<field name="data-mail-subject" showon="mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_SUBJECT" />
+				<field name="data-mail-body" showon="mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_BODY" />
+				<field type="spacer" showon="mail:Mail" name="data-mail-spacer" label="PLG_JOOAG_SHARIFF_MAIL_DESC" class="alert alert-error" />
 				
+				<field name="info_line" type="line" />
 				<field name="info" label="PLG_JOOAG_SHARIFF_INFO_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Info">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="info_ordering" showon="shariff_info:Info" type="integer" default="9" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="data_info_url" showon="shariff_info:Info" type="modal_article" label="PLG_JOOAG_SHARIFF_INFO_BUTTON_ARTICLE"/>
-				<field type="spacer" showon="shariff_info:Info" name="spacer_LABEL_INFO_BUTTON" label="PLG_JOOAG_SHARIFF_INFO_DESC"  class="alert alert-info" />
-				<field type="line" name="line9" />
+				<field name="info_ordering" showon="info:Info" type="integer" default="9" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
+				<field name="data_info_url" showon="info:Info" type="modal_article" label="PLG_JOOAG_SHARIFF_INFO_BUTTON_ARTICLE"/>
+				<field type="spacer" showon="info:Info" name="spacer_LABEL_INFO_BUTTON" label="PLG_JOOAG_SHARIFF_INFO_DESC"  class="alert alert-info" />
 				
+				<field name="addthis_line" type="line" />
 				<field name="addthis" label="PLG_JOOAG_SHARIFF_ADDTHIS_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Addthis">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="addthis_ordering" showon="shariff_addthis:Addthis" type="integer" default="10" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line10" />
+				<field name="addthis_ordering" showon="addthis:Addthis" type="integer" default="10" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="tumblr_line" type="line" />
 				<field name="tumblr" label="PLG_JOOAG_SHARIFF_TUMBLR_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Tumblr">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="tumblr_ordering" showon="shariff_tumblr:Tumblr" type="integer" default="11" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line11" />
+				<field name="tumblr_ordering" showon="tumblr:Tumblr" type="integer" default="11" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="flattr_line" type="line" />
 				<field name="flattr" label="PLG_JOOAG_SHARIFF_FLATTR_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Flattr">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="flattr_ordering" showon="shariff_flattr:Flattr" type="integer" default="12" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="flattr_category" showon="shariff_flattr:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_CATEGORY"/>
-				<field name="flattr_user" showon="shariff_flattr:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_USER"/>
-				<field type="line" name="line12" />
+				<field name="flattr_ordering" showon="flattr:Flattr" type="integer" default="12" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
+				<field name="flattr_category" showon="flattr:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_CATEGORY"/>
+				<field name="flattr_user" showon="flattr:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_USER"/>
 				
+				<field name="diaspora_line" type="line" />
 				<field name="diaspora" label="PLG_JOOAG_SHARIFF_DIASPORA_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Diaspora">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="diaspora_ordering" showon="shariff_diaspora:Diaspora" type="integer" default="13" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line13" />
+				<field name="diaspora_ordering" showon="diaspora:Diaspora" type="integer" default="13" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="reddit_line" type="line" />
 				<field name="reddit" label="PLG_JOOAG_SHARIFF_REDDIT_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Reddit">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="reddit_ordering" showon="shariff_reddit:Reddit" type="integer" default="14" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line14" />
+				<field name="reddit_ordering" showon="reddit:Reddit" type="integer" default="14" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="stumbleupon_line" type="line" />
 				<field name="stumbleupon" label="PLG_JOOAG_SHARIFF_STUMBLEUPON_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Stumbleupon">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="stumbleupon_ordering" showon="shariff_stumbleupon:Stumbleupon" type="integer" default="15" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line15" />
+				<field name="stumbleupon_ordering" showon="stumbleupon:Stumbleupon" type="integer" default="15" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
 				
+				<field name="threema_line" type="line" />
 				<field name="threema" label="PLG_JOOAG_SHARIFF_THREEMA_NAME" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="Threema">PLG_JOOAG_SHARIFF_ENABLED</option>
 				</field>
-				<field name="threema_ordering" showon="shariff_threema:Threema" type="integer" default="16" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field type="line" name="line16" />
+				<field name="threema_ordering" showon="threema:Threema" type="integer" default="16" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
+				<field name="end_line" type="line" />
 			</fieldset>
 			
 			<fieldset name="PLG_JOOAG_SHARIFF_OUTPUT">				
@@ -169,22 +171,22 @@
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="1">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="com_content_views_categories" label="PLG_JOOAG_SHARIFF_IN_CATEGORIES" showon="com_content:1" type="radio" multiple="true" class="btn-group" default="1" >
+				<field name="com_content_views_categories" label="PLG_JOOAG_SHARIFF_IN_CATEGORIES" showon="com_content:1" type="radio" multiple="true" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="com_content.category">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="com_content_views_articles" label="PLG_JOOAG_SHARIFF_IN_ARTICLES" showon="com_content:1" type="radio" multiple="true" class="btn-group" default="1" >
+				<field name="com_content_views_articles" label="PLG_JOOAG_SHARIFF_IN_ARTICLES" showon="com_content:1" type="radio" multiple="true" class="btn-group" default="com_content.article" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="com_content.article">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="com_content_category_assignment" showon="com_content:1" label="PLG_JOOAG_SHARIFF_CATEGORY_ASSIGNMENT" type="list" class="btn-group" default="0" >
+				<field name="com_content_category_assignment" showon="com_content:1" label="PLG_JOOAG_SHARIFF_CATEGORY_ASSIGNMENT" type="list" class="btn-group" default="1" >
 					<option value="0">PLG_JOOAG_SHARIFF_SHOW_NOWHERE</option>
 					<option value="1">PLG_JOOAG_SHARIFF_SHOW_ON_ALL</option>
 					<option value="2">PLG_JOOAG_SHARIFF_SHOW_ON_SELECTED</option>
 					<option value="3">PLG_JOOAG_SHARIFF_SHOW_ON_ALL_EXPECTED_SELECTED</option>
 					</field>					
 				<field name="com_content_category_select" showon="com_content:1" type="category" multiple="true" extension="com_content" label="PLG_JOOAG_SHARIFF_CATEGORY_SELECT" />
-				<field name="com_content_menu_assignment" showon="com_content:1" label="PLG_JOOAG_SHARIFF_MENU_ASSIGNMENT" type="list" class="btn-group" default="0" >
+				<field name="com_content_menu_assignment" showon="com_content:1" label="PLG_JOOAG_SHARIFF_MENU_ASSIGNMENT" type="list" class="btn-group" default="1" >
 					<option value="0">PLG_JOOAG_SHARIFF_SHOW_NOWHERE</option>
 					<option value="1">PLG_JOOAG_SHARIFF_SHOW_ON_ALL</option>
 					<option value="2">PLG_JOOAG_SHARIFF_SHOW_ON_SELECTED</option>
@@ -192,12 +194,12 @@
 					</field>
 				<field name="com_content_menu_select" showon="com_content:1" type="menuitem" multiple="true" label="PLG_JOOAG_SHARIFF_MENU_SELECT" />
 				
-				<field type="line" name="output_everywhere_line" />
-				<field name="com_everywhere" label="PLG_JOOAG_OUTPUT_EVERYWHERE" type="radio" class="btn-group" default="1" >
+				<field type="line" name="com_everywhere_line" />
+				<field name="com_everywhere" label="PLG_JOOAG_OUTPUT_EVERYWHERE" type="radio" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="1">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="com_everywhere_menu_assignment" showon="com_everywhere:1" label="PLG_JOOAG_SHARIFF_MENU_ASSIGNMENT" type="list" class="btn-group" default="0" >
+				<field name="com_everywhere_menu_assignment" showon="com_everywhere:1" label="PLG_JOOAG_SHARIFF_MENU_ASSIGNMENT" type="list" class="btn-group" default="1" >
 					<option value="0">PLG_JOOAG_SHARIFF_SHOW_NOWHERE</option>
 					<option value="1">PLG_JOOAG_SHARIFF_SHOW_ON_ALL</option>
 					<option value="2">PLG_JOOAG_SHARIFF_SHOW_ON_SELECTED</option>
@@ -206,22 +208,16 @@
 				<field name="com_everywhere_menu_select" showon="com_everywhere:1" type="menuitem" multiple="true" label="PLG_JOOAG_SHARIFF_MENU_SELECT" />
 				<field type="spacer" name="myspaceroutput_everywhere" showon="com_everywhere:1" label="PLG_JOOAG_OUTPUT_EVERYWHERE_DESC" class="alert alert-info" />
 	
-				<field type="line" name="line183" />
-				<field name="shorttag_use" label="PLG_JOOAG_OUTPUT_SHORTTAG_MODE" type="radio" class="btn-group" default="1" >
+				<field type="line" name="shorttag_use_line" />
+				<field name="com_shorttag" label="PLG_JOOAG_OUTPUT_SHORTTAG_MODE" type="radio" class="btn-group" default="1" >
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="1">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>	
-				<field type="spacer" name="myspacershorttag_use" showon="shorttag_use:1" label="PLG_JOOAG_OUTPUT_SHORTTAG_MODE_DESC" class="alert alert-info" />
+				<field type="spacer" name="shorttag_use_line_desc" showon="com_shorttag:1" label="PLG_JOOAG_OUTPUT_SHORTTAG_MODE_DESC" class="alert alert-info" />
 			</fieldset>
-			<fieldset name="PLG_JOOAG_SHARIFF_EXPERTS">
-				<field type="line" name="line107" />
-				<field name="data-url" label="PLG_JOOAG_SHARIFF_DATA_URL" type="list" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DATA_URL_AUTOMATIC</option>
-					<option value="1">PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM</option>
-					</field>
-				<field name="data-url-custom" showon="data-url:1" type="input" label="PLG_JOOAG_SHARIFF_CUSTOM_DOMAIN"/>
-				<field type="line" name="line104" />
-				<field name="output_position" label="PLG_JOOAG_SHARIFF_OUTPUT_POSITION" type="list" class="btn-group" default="1" >
+			<fieldset name="PLG_JOOAG_SHARIFF_EXPERTS">				
+				<field name="output_position_line" type="line" />
+				<field name="output_position" label="PLG_JOOAG_SHARIFF_OUTPUT_POSITION" type="list" class="btn-group" default="top" >
 					<option value="top">PLG_JOOAG_SHARIFF_OUTPUT_POSITION_TOP</option>
 					<option value="bottom">PLG_JOOAG_SHARIFF_OUTPUT_POSITION_BOTTOM</option>
 					<option value="both">PLG_JOOAG_SHARIFF_OUTPUT_POSITION_TOP_AND_BOTTOM</option>
@@ -235,22 +231,28 @@
 					<option value="grey">PLG_JOOAG_SHARIFF_THEME_GREY</option>
 					<option value="white">PLG_JOOAG_SHARIFF_THEME_WHITE</option>
 					</field>
-					<field type="line" name="line105" />
+				<field name="assets_line" type="line" />
 				<field name="shariffcss" type="filelist" default="shariff.complete.css" label="PLG_JOOAG_SHARIFF_ASSETS_CSS" directory="media/plg_jooag_shariff/css" filter="css" hide_none="true" hide_default="true" />
 				<field name="shariffjs" type="filelist" default="shariff.min.js" label="PLG_JOOAG_SHARIFF_ASSETS_JS" directory="media/plg_jooag_shariff/js" filter="js" hide_none="true" hide_default="true" />
-				<field type="spacer" name="labelcssjs" label="PLG_JOOAG_SHARIFF_ASSETS_DESC" class="alert alert-info" />
-				<field type="line" name="line106" />
+				<field name="labelcssjs" type="spacer" label="PLG_JOOAG_SHARIFF_ASSETS_DESC" class="alert alert-info" />
+				<field name="php_backend_line" type="line" />
 				<field name="data_backend_url" label="PLG_JOOAG_SHARIFF_SHARE_COUNTER_BACKEND" type="list" class="btn-group" default="1">
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="1">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="cache_time" showon="data_backend_url:1" type="number" default="60" label="PLG_JOOAG_SHARIFF_CACHE_TIME" step="10" />	
-				<field name="cache" showon="data_backend_url:1" label="PLG_JOOAG_SHARIFF_CACHE_SETTINGS" type="list" class="btn-group" default="0">
+				<field name="cache_time" showon="data_backend_url:1" type="number" default="60" label="PLG_JOOAG_SHARIFF_CACHE_TIME" step="10" />
+				<field name="client_timeout" showon="data_backend_url:1" type="number" default="5" label="PLG_JOOAG_SHARIFF_CACHE_TIMEOUT" step="1" />			
+				<field name="cache" label="PLG_JOOAG_SHARIFF_CACHE_SETTINGS" type="list" class="btn-group" default="0">
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="1">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="cache_handler" showon="cache:1" type="cachehandler" default="" label="PLG_JOOAG_SHARIFF_CACHE_HANDLER" />
-				<field name="client_timeout" showon="data_backend_url:1" type="number" default="5" label="PLG_JOOAG_SHARIFF_CACHE_TIMEOUT" step="1" />	
+				<field name="cache_handler" showon="cache:1" type="cachehandler" label="PLG_JOOAG_SHARIFF_CACHE_HANDLER" />
+				<field name="data_url" label="PLG_JOOAG_SHARIFF_DATA_URL" type="list" class="btn-group" default="0" >
+					<option value="0">PLG_JOOAG_SHARIFF_DATA_URL_AUTOMATIC</option>
+					<option value="1">PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM</option>
+					</field>
+				<field name="data_url_custom" showon="data_url:1" type="input" label="PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM_INPUT"/>
+				<field name="data_url_desc" type="spacer" showon="data-url:1" label="PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM_DESC" class="alert alert-info" />
 			</fieldset>	
 		</fields>
 	</config>
