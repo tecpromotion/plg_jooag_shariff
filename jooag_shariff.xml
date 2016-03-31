@@ -171,14 +171,6 @@
 					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
 					<option value="1">PLG_JOOAG_SHARIFF_ENABLED</option>
 					</field>
-				<field name="com_content_views_categories" label="PLG_JOOAG_SHARIFF_IN_CATEGORIES" showon="com_content:1" type="radio" multiple="true" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="com_content.category">PLG_JOOAG_SHARIFF_ENABLED</option>
-					</field>
-				<field name="com_content_views_articles" label="PLG_JOOAG_SHARIFF_IN_ARTICLES" showon="com_content:1" type="radio" multiple="true" class="btn-group" default="com_content.article" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="com_content.article">PLG_JOOAG_SHARIFF_ENABLED</option>
-					</field>
 				<field name="com_content_category_assignment" showon="com_content:1" label="PLG_JOOAG_SHARIFF_CATEGORY_ASSIGNMENT" type="list" class="btn-group" default="1" >
 					<option value="0">PLG_JOOAG_SHARIFF_SHOW_NOWHERE</option>
 					<option value="1">PLG_JOOAG_SHARIFF_SHOW_ON_ALL</option>
@@ -217,10 +209,9 @@
 			</fieldset>
 			<fieldset name="PLG_JOOAG_SHARIFF_EXPERTS">				
 				<field name="output_position_line" type="line" />
-				<field name="output_position" label="PLG_JOOAG_SHARIFF_OUTPUT_POSITION" type="list" class="btn-group" default="top" >
+				<field name="output_position" label="PLG_JOOAG_SHARIFF_OUTPUT_POSITION" type="list" multiple="true" default="top" >
 					<option value="top">PLG_JOOAG_SHARIFF_OUTPUT_POSITION_TOP</option>
 					<option value="bottom">PLG_JOOAG_SHARIFF_OUTPUT_POSITION_BOTTOM</option>
-					<option value="both">PLG_JOOAG_SHARIFF_OUTPUT_POSITION_TOP_AND_BOTTOM</option>
 					</field>
 				<field name="data_orientation" label="PLG_JOOAG_SHARIFF_ORIENATATION" type="list" class="btn-group" default="horizontal">
 					<option value="horizontal">PLG_JOOAG_SHARIFF_ORIENATATION_HORIZONTAL</option>

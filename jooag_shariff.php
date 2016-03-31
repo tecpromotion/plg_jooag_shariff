@@ -21,7 +21,8 @@ defined('_JEXEC') or die;
  **/
 class plgSystemJooag_Shariff extends JPlugin
 {	
-	public function __construct(& $subject, $config) {
+	public function __construct(& $subject, $config)
+	{
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
@@ -40,12 +41,13 @@ class plgSystemJooag_Shariff extends JPlugin
 	{
 		if($this->getAccessGeneral($context, $article, 'top') == 1)
 		{
-			str_replace('{noshariff}', '', $article->introtext, $stringCount);
+			$article->introtext = str_replace('{noshariff}', '', $article->introtext, $stringCount); //Fix for Newsflash Module
 			
 			if($stringCount == 0)
 			{
 				return $this->generateHTML($config = array());
 			}
+			
 		}
 	}
 
@@ -63,7 +65,7 @@ class plgSystemJooag_Shariff extends JPlugin
 	{			
 		if($this->getAccessGeneral($context, $article, 'bottom') == 1)
 		{
-			str_replace('{noshariff}', '', $article->introtext, $stringCount);
+			$article->introtext = str_replace('{noshariff}', '', $article->introtext, $stringCount); //Fix for Newsflash Module
 			
 			if($stringCount == 0)
 			{
@@ -75,7 +77,9 @@ class plgSystemJooag_Shariff extends JPlugin
 	//Show Everywhere
 	public function onBeforeRender()
 	{
-		if($this->params->get('output_everywhere') == 1)
+		$app = JFactory::getApplication();
+		
+		if($app->isSite())
 		{
 			$doc = JFactory::getDocument();
 			$buffer = $doc->getBuffer('component');
@@ -102,30 +106,32 @@ class plgSystemJooag_Shariff extends JPlugin
 	 **/
 	public function onContentPrepare($context, &$article, &$params, $page = 0)
 	{		
-		if($this->getAccessGeneral('com_shorttag', $article, 'top') == 1)
+		$app = JFactory::getApplication();
+		
+		if(preg_match_all('/{shariff\ ([^}]+)\}|\{shariff\}/', $article->text, $matches) and $app->isSite() and $this->getAccessGeneral('com_shorttag', $article, 'top') == 1)
 		{
-			if(preg_match_all('/{shariff\ ([^}]+)\}|\{shariff\}/', $article->text, $matches))
+			$params = explode(' ', trim($matches[0][0],'}'));
+			$config = array ();
+
+			foreach ($params as $key => $item)
 			{
-				$params = explode(' ', trim($matches[0][0],'}'));
-				$config = array ();
-
-				foreach ($params as $key => $item)
+				if($key != 0)
 				{
-					if($key != 0)
-					{
-						list($k, $v) = explode("=", $item);
-						$config[ $k ] = $v;
-					}
+					list($k, $v) = explode("=", $item);
+					$config[ $k ] = $v;
 				}
-				
-				$this->params->get('com_shorttag') ? $config['shorttag'] = 1 : $config['shorttag'] = 0;
-
-				$article->text = str_replace($matches[0][0], $this->generateHTML($config), $article->text);
 			}
+			
+			$this->params->get('com_shorttag') ? $config['shorttag'] = 1 : $config['shorttag'] = 0;
+			$article->text = str_replace($matches[0][0], $this->generateHTML($config), $article->text);
+		}
+
+		//Fix for Newsflash Module
+		if	($context == 'mod_articles_news.content')
+		{ 
+			$article->text .= '{noshariff}';
 		}
 	}
-
-
 	
 	//###############Access::Section->START
 	private function getAccessGeneral($context, $article, $position)
@@ -133,47 +139,37 @@ class plgSystemJooag_Shariff extends JPlugin
 		$app = JFactory::getApplication();
 		$access = 0;
 		
-		if($app->isSite())
+		if(in_array($position, $this->params->get('output_position')) and $app->isSite())
 		{
-			if($this->params->get('output_position') == $position or $this->params->get('output_position') == 'both')
-			{	
-				if($this->params->get('com_content') == 1)
-				{
-					if($this->getAccessComContent($context ,$article) == 1 or $this->getAccessMenu($context, $article) == 1)
-					{
-						if($context ==  $this->params->get('com_content_views_articles') or $context ==  $this->params->get('com_content_views_categories'))
-						{
-							$access = 1;
-						}
-					}
-				}
-				
-				if($this->params->get('com_everywhere') == 1)
-				{
-					if($this->getAccessMenu('com_everywhere.placeholder' ,$article) == 1)
-					{
-						$access = 1;
-					}
-				}
+			//For Com_content Articles
+			if($this->getAccessComContent($context ,$article) == 1 and $this->getAccessMenu($context) == 1)
+			{
+				$access = 1;
 			}
-			
-			if($this->params->get('com_shorttag') == 1)
+
+			//For getbuffer('component') aka com_everywhere
+			if($this->params->get('com_everywhere') == 1 and $context == 'com_everywhere' and $this->getAccessMenu('com_everywhere.placeholder') == 1)
 			{
 				$access = 1;
 			}
 		}
-
+		
+		if($this->params->get('com_shorttag') == 1 and $context == 'com_shorttag' and $app->isSite())
+		{
+			$access = 1;
+		}
+		
 		return $access;
 	}
 	
 	private function getAccessMenu($context)
 	{
+		$menuAccess = 0;
 		$app = JFactory::getApplication();
 		$menu = $app->getMenu()->getActive();
-		$menuIds = (array)$this->params->get('com_content_menu_select');
 		is_object($menu) ? $actualMenuId = $menu->id : $actualMenuId = $app->input->getInt('Itemid', 0);
 		$context = explode('.', $context);
-
+		$menuIds = (array)$this->params->get($context[0].'_menu_select');
 		$this->params->get($context[0].'_menu_assignment') == 0 ? $menuAccess = 0 : '';
 		$this->params->get($context[0].'_menu_assignment') == 1 ? $menuAccess = 1 : '';
 		
@@ -194,23 +190,28 @@ class plgSystemJooag_Shariff extends JPlugin
 	
 	private function getAccessComContent($context, $article)
 	{
-		$catIds = (array)$this->params->get('com_content_category_select');
-		$this->params->get('com_content_category_assignment') == 0 ? $comContentAccess = 0 : '';
-		$this->params->get('com_content_category_assignment') == 1 ? $comContentAccess = 1 : '';
-		
-		if($this->params->get('com_content_category_assignment') == 2)
+		$access = 0;
+
+		if($this->params->get('com_content') == 1 and $context == 'com_content.article')
 		{
-			$comContentAccess = 0;
-			isset($article->catid) and in_array($article->catid, $catIds) ? $comContentAccess = 1 : '';
+			$catIds = (array)$this->params->get('com_content_category_select');
+			$this->params->get('com_content_category_assignment') == 0 ? $access = 0 : '';
+			$this->params->get('com_content_category_assignment') == 1 ? $access = 1 : '';
+			
+			if($this->params->get('com_content_category_assignment') == 2)
+			{
+				$access = 0;
+				isset($article->catid) and in_array($article->catid, $catIds) ? $access = 1 : '';
+			}
+
+			if($this->params->get('com_content_category_assignment') == 3)
+			{
+				$access = 1;
+				isset($article->catid) and in_array($article->catid, $catIds) ? $access = 0 : '';
+			}
 		}
 
-		if($this->params->get('com_content_category_assignment') == 3)
-		{
-			$comContentAccess = 1;
-			isset($article->catid) and in_array($article->catid, $catIds) ? $comContentAccess = 0 : '';
-		}
-
-		return $comContentAccess;
+		return $access;
 	}
 	//###############Access::Section->END
 	
@@ -219,6 +220,7 @@ class plgSystemJooag_Shariff extends JPlugin
 	 **/
 	public function generateHTML($config) //for shorttag
 	{
+
 		//Services
 		$services = array('twitter','facebook','googleplus','linkedin','pinterest','xing','whatsapp','mail','info','addthis','tumblr','flattr','diaspora','reddit','stumbleupon','threema');
 		
@@ -226,10 +228,9 @@ class plgSystemJooag_Shariff extends JPlugin
 		{
 			$this->params->get($service) ? $activeServices[$service][] = $this->params->get($service.'_ordering') : '';
 		}
+		
 		if(isset($activeServices))
-		{
-			
-			
+		{			
 			JHtml::_('jquery.framework');
 			$doc = JFactory::getDocument();
 			$doc->addStyleSheet(JURI::root().'media/plg_jooag_shariff/css/'.$this->params->get('shariffcss'));
@@ -254,11 +255,10 @@ class plgSystemJooag_Shariff extends JPlugin
 			{
 				$orderedServices[] = $key;
 			}
-				
+						
 			//Services output
 			$html .= ' data-services="'.htmlspecialchars(json_encode((array)$orderedServices)).'"';	
-
-					
+	
 			//Twitter
 			if($this->params->get('shariff_twitter'))
 			{
@@ -299,7 +299,7 @@ class plgSystemJooag_Shariff extends JPlugin
 	}
 	
 	/**
-	 * Generator for shariff.json if the is saved
+	 * Generator for shariff.json File
 	 *
 	 * @return void
 	 **/
