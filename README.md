@@ -1,6 +1,7 @@
-<h1>Joomla 3.4+ Shariff Plugin</h1>
-<h3>The 1-Click-Social-Button with privacy in mind</h3>
-This Joomla 3.4+ Plugin utilizes Heise Shariff Library to enable website users to share their favorite content without compromising their privacy.
+<h1>Joomla 3.5+ Shariff Plugin</h1>
+<h2>Now with PHP7 Support</h2>
+<h3>The 1-Click-Social-Button with privacy in mind and can speed up your site</h3>
+This Joomla 3.4+ Plugin utilizes Heise Shariff Library to enable website users to share their favorite content without compromising their privacy. A good side-effect of this implentation is a faster loading time for your website, because the user need no direct connection to get the shares from services like Facebook.
 
 <b>System Requirements:</b>
 Joomla 3.4+ and PHP 5.5+ for the Share Counter
@@ -50,6 +51,15 @@ Joomla 3.4+ and PHP 5.5+ for the Share Counter
   * Not so important to delete this folder. It's not needed anymore, because we use the Joomla Core Cache folder.
 * Before V3.0.0 Stable
   * Delete the old Plugin and install the new one
+
+<h2>Installation and Usage:</h2>
+* Download the latest Stable release here: https://github.com/joomla-agency/plg_jooag_shariff/releases
+* Install it via the Joomla Installer: https://docs.joomla.org/Installing_an_extension
+* Go to Joomla Backend -> Extensions -> Plugins -> JooAg Shariff
+* Activate the Plugin
+* Go through all settings and setup the plugin
+* Now visit the Frontend and you should see the Plugin in action
+* If not, please post here the Bug: https://github.com/joomla-agency/plg_jooag_shariff/issues
 
 <h2>Documentation:</h2>
 <h4>Share Counter:</h4>
