@@ -33,13 +33,15 @@ Joomla 3.4+ and PHP 5.5+ for the Share Counter
 - [x] v3.2.8 - New: AddThis button
 - [x] v3.2.9 - New: tumblr button
 - [ ] v3.3 - Integration for more Componentes e.g. Zoo, K2, SobiPro, Seblod, JoomGallery
-- [ ] v3.4 - Overhaul the output and allow multiple instances
+- [ ] v3.4 - Overhaul the output
 - [ ] v3.5 - Maybe shorttag parameter support for custom icons, backend integration and other shariff settings
 - [ ] v3.6 - Rearrange the Plugin Options and simplify settings
 - [ ] v3.x - Ongoing integration of updates from Shariff Libraray & Backend
 - [ ] v3.x - If you have a good idea, maybe this is the next v3.x
 
 <h2>Update Instructions:</h2>
+* V3.2.x -> V3.3.0
+  * All Plugin Settings need to be revisited. 
 * V3.1.x -> V3.2.x
   * Everything fine! Nothing todo.
 * V3.0.6 -> V3.1.x
