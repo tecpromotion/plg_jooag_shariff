@@ -233,9 +233,17 @@ class plgSystemJooag_Shariff extends JPlugin
 		{			
 			JHtml::_('jquery.framework');
 			$doc = JFactory::getDocument();
-			$doc->addStyleSheet(JURI::root().'media/plg_jooag_shariff/css/'.$this->params->get('shariffcss'));
-			$doc->addScript(JURI::root().'media/plg_jooag_shariff/js/'.$this->params->get('shariffjs'));
-			$doc->addScriptDeclaration('jQuery(document).ready(function() {var buttonsContainer = jQuery(".shariff");new Shariff(buttonsContainer);});');
+			
+			if($this->params->get('shariffcss') != '-1')
+			{	
+				$doc->addStyleSheet(JURI::root().'media/plg_jooag_shariff/css/'.$this->params->get('shariffcss'));
+			}
+
+			if($this->params->get('shariffjs') != '-1')
+			{
+				$doc->addScript(JURI::root().'media/plg_jooag_shariff/js/'.$this->params->get('shariffjs'));
+				$doc->addScriptDeclaration('jQuery(document).ready(function() {var buttonsContainer = jQuery(".shariff");new Shariff(buttonsContainer);});');
+			}
 
 			//Cache Folder
 			jimport('joomla.filesystem.folder');

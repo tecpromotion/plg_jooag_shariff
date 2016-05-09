@@ -223,8 +223,8 @@
 					<option value="white">PLG_JOOAG_SHARIFF_THEME_WHITE</option>
 					</field>
 				<field name="assets_line" type="line" />
-				<field name="shariffcss" type="filelist" default="shariff.complete.css" label="PLG_JOOAG_SHARIFF_ASSETS_CSS" directory="media/plg_jooag_shariff/css" filter="css" hide_none="true" hide_default="true" />
-				<field name="shariffjs" type="filelist" default="shariff.min.js" label="PLG_JOOAG_SHARIFF_ASSETS_JS" directory="media/plg_jooag_shariff/js" filter="js" hide_none="true" hide_default="true" />
+				<field name="shariffcss" type="filelist" default="shariff.complete.css" label="PLG_JOOAG_SHARIFF_ASSETS_CSS" directory="media/plg_jooag_shariff/css" filter="css" hide_none="false" hide_default="true" />
+				<field name="shariffjs" type="filelist" default="shariff.min.js" label="PLG_JOOAG_SHARIFF_ASSETS_JS" directory="media/plg_jooag_shariff/js" filter="js" hide_none="false" hide_default="true" />
 				<field name="labelcssjs" type="spacer" label="PLG_JOOAG_SHARIFF_ASSETS_DESC" class="alert alert-info" />
 				<field name="php_backend_line" type="line" />
 				<field name="data_backend_url" label="PLG_JOOAG_SHARIFF_SHARE_COUNTER_BACKEND" type="list" class="btn-group" default="1">
