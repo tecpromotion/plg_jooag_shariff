@@ -108,6 +108,13 @@ class plgSystemJooag_Shariff extends JPlugin
 	{		
 		$app = JFactory::getApplication();
 		
+		
+		/*
+		echo '<pre>';
+		print_r($this->params->get('services-test'));
+		echo '</pre>';
+		*/
+		
 		if(preg_match_all('/{shariff\ ([^}]+)\}|\{shariff\}/', $article->text, $matches) and $app->isSite() and $this->getAccessGeneral('com_shorttag', $article, 'top') == 1)
 		{
 			$params = explode(' ', trim($matches[0][0],'}'));
@@ -219,91 +226,78 @@ class plgSystemJooag_Shariff extends JPlugin
 	 * Shariff output generation
 	 **/
 	public function generateHTML($config) //for shorttag
-	{
-
-		//Services
-		$services = array('twitter','facebook','googleplus','linkedin','pinterest','xing','whatsapp','mail','info','addthis','tumblr','flattr','diaspora','reddit','stumbleupon','threema');
+	{	
+		JHtml::_('jquery.framework');
+		$doc = JFactory::getDocument();
 		
-		foreach ($services as $service)
+		if($this->params->get('shariffcss') != '-1')
+		{	
+			$doc->addStyleSheet(JURI::root().'media/plg_jooag_shariff/css/'.$this->params->get('shariffcss'));
+		}
+		
+		if($this->params->get('shariffjs') != '-1')
 		{
-			$this->params->get($service) ? $activeServices[$service][] = $this->params->get($service.'_ordering') : '';
+			$doc->addScript(JURI::root().'media/plg_jooag_shariff/js/'.$this->params->get('shariffjs'));
+			$doc->addScriptDeclaration('jQuery(document).ready(function() {var buttonsContainer = jQuery(".shariff");new Shariff(buttonsContainer);});');
 		}
-		
-		if(isset($activeServices))
-		{			
-			JHtml::_('jquery.framework');
-			$doc = JFactory::getDocument();
-			
-			if($this->params->get('shariffcss') != '-1')
-			{	
-				$doc->addStyleSheet(JURI::root().'media/plg_jooag_shariff/css/'.$this->params->get('shariffcss'));
-			}
 
-			if($this->params->get('shariffjs') != '-1')
-			{
-				$doc->addScript(JURI::root().'media/plg_jooag_shariff/js/'.$this->params->get('shariffjs'));
-				$doc->addScriptDeclaration('jQuery(document).ready(function() {var buttonsContainer = jQuery(".shariff");new Shariff(buttonsContainer);});');
-			}
-
-			//Cache Folder
-			jimport('joomla.filesystem.folder');
-			if(!JFolder::exists(JPATH_SITE.'/cache/plg_jooag_shariff') and $this->params->get('data_backend_url')){
-				JFolder::create(JPATH_SITE.'/cache/plg_jooag_shariff', 0755);
-			}
-					
-			$html  = '<div class="shariff"';
-			$html .= ($this->params->get('data_backend_url')) ? ' data-backend-url="/plugins/system/jooag_shariff/backend/"' : '';
-			$html .= ' data-lang="'.explode("-", JFactory::getLanguage()->getTag())[0].'"';
-			$html .= (array_key_exists('orientation', $config)) ? ' data-orientation="'.$config['orientation'].'"' : ' data-orientation="'.$this->params->get('data_orientation').'"';
-			$html .= (array_key_exists('theme', $config)) ? ' data-theme="'.$config['theme'].'"' : ' data-theme="'.$this->params->get('data_theme').'"';		
-		
-			array_multisort($activeServices);
-			
-			foreach($activeServices as $key => $activeService)
-			{
-				$orderedServices[] = $key;
-			}
-						
-			//Services output
-			$html .= ' data-services="'.htmlspecialchars(json_encode((array)$orderedServices)).'"';	
+		//Cache Folder
+		jimport('joomla.filesystem.folder');
+		if(!JFolder::exists(JPATH_SITE.'/cache/plg_jooag_shariff') and $this->params->get('data_backend_url')){
+			JFolder::create(JPATH_SITE.'/cache/plg_jooag_shariff', 0755);
+		}
+				
+		$html  = '<div class="shariff"';
+		$html .= ($this->params->get('data_backend_url')) ? ' data-backend-url="/plugins/system/jooag_shariff/backend/"' : '';
+		$html .= ' data-lang="'.explode("-", JFactory::getLanguage()->getTag())[0].'"';
+		$html .= (array_key_exists('orientation', $config)) ? ' data-orientation="'.$config['orientation'].'"' : ' data-orientation="'.$this->params->get('data_orientation').'"';
+		$html .= (array_key_exists('theme', $config)) ? ' data-theme="'.$config['theme'].'"' : ' data-theme="'.$this->params->get('data_theme').'"';		
 	
-			//Twitter
-			if($this->params->get('shariff_twitter'))
+		
+		foreach($this->params->get('services') as $service)
+		{
+			if($service->services)
 			{
-				$html .= ($this->params->get('shariff_twitter_via')) ? ' data-twitter-via="'.$this->params->get('shariff_twitter_via').'"' : '';
+				$services[] = $service->services;
 			}
-			//Flattr
-			if($this->params->get('shariff_flattr'))
+			
+			if($service->services == 'twitter')
+			{
+				$html .= ($this->params->get('shariff_twitter_via')) ? ' data-twitter-via="'.$service->shariff_twitter_via.'"' : '';
+			}
+			
+			if($service->services == 'flattr')
 			{	
-				$html .= ($this->params->get('shariff_flattr_category')) ? ' data-flattr-category="'.$this->params->get('shariff_flattr_category').'"' : '';
-				$html .= ($this->params->get('shariff_flattr_user')) ? ' data-flattr-user="'.$this->params->get('shariff_flattr_user').'"' : '';
-			} 
-			
-			//Mail
-			if($this->params->get('shariff_mail'))
-			{
-				$html .= ($this->params->get('data_mail_url')) ? ' data-mail-url="mailto:'.$this->params->get('data_mail_url').'"' : '';
-				$html .= ($this->params->get('data-mail-subject')) ? ' data-mail-subject="'.$this->params->get('data-mail-subject').'"' : '';
-				$html .= ($this->params->get('data-mail-body')) ? ' data-mail-body="'.$this->params->get('data-mail-body').'"' : '';
+				$html .= ($this->params->get('shariff_flattr_category')) ? ' data-flattr-category="'.$service->shariff_flattr_category.'"' : '';
+				$html .= ($this->params->get('shariff_flattr_user')) ? ' data-flattr-user="'.$service->shariff_flattr_user.'"' : '';
 			}
-			//Info
-			if($this->params->get('shariff_info'))
+
+			if($service->services == 'mail')
 			{
-				if ((int)$this->params->get('data_info_url'))
-				{
-					jimport('joomla.database.table');
-					$item =	JTable::getInstance("content");
-					$item->load($this->params->get('data_info_url'));
-					require_once JPATH_SITE . '/components/com_content/helpers/route.php';
-					$link = JRoute::_(ContentHelperRoute::getArticleRoute($item->id, $item->catid, $item->language));
-					$html .= ' data-info-url="'.$link.'"';
-				}
+
+				$html .= ($service->data_mail_url) ? ' data-mail-url="mailto:'.$service->data_mail_url.'"' : '';
+				$html .= ($service->data_mail_subject) ? ' data-mail-subject="'.$service->data-mail-subject.'"' : '';
+				$html .= ($service->data_mail_body) ? ' data-mail-body="'.$service->data-mail-body.'"' : '';
 			}
 			
-			$html .= '></div>';
-					
-			return $html;
+			if($service->services == 'info' and (int)$service->data_info_url)
+			{
+				jimport('joomla.database.table');
+				$item =	JTable::getInstance("content");
+				$item->load($service->data_info_url);
+				require_once JPATH_SITE . '/components/com_content/helpers/route.php';
+				$link = JRoute::_(ContentHelperRoute::getArticleRoute($item->id, $item->catid, $item->language));
+				$html .= ' data-info-url="'.$link.'"';
+			}	
 		}
+
+		//Services output
+		$html .= ' data-services="'.htmlspecialchars(json_encode((array)$services)).'"';	
+
+		$html .= '></div>';
+				
+		return $html;
+		
 	}
 	
 	/**
@@ -322,13 +316,13 @@ class plgSystemJooag_Shariff extends JPlugin
 
 			$services = array('googleplus','facebook','linkedin','reddit','stumbleupon','flattr','pinterest','xing','addthis');
 			
-			foreach($services as $service)
+			foreach($this->params->get('services') as $service)
 			{
-				$data->services[] = $this->params->get($service);
+				$data->services[] = $service->services;
 			}
 			
 			//Delete unused services
-			$data->services = array_diff($data->services, array('0'));
+			$data->services = array_intersect($services, $data->services);
 			
 			if($params->fb_app_id and $params->fb_secret)
 			{

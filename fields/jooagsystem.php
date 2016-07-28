@@ -56,6 +56,9 @@ class JFormFieldJooagsystem extends JFormField
 		$style .= '.form-horizontal .control-group {margin: 6px 0;}'; 
 		$style .= '.form-horizontal .control-label {padding-top:0px;padding-bottom:0px;}'; 
 		$style .= '.controls > .radio:first-child, .controls > .checkbox:first-child {padding-top: 0px;}'; 
+		$style .= '.subform-repeatable-group > td{padding:0px 8px;}'; 
+		$style .= '.subform-repeatable-group .control-group {margin:6px 0;}'; 
+		$style .= '.subform-repeatable-group td:nth-child(2) .control-group{display:none;}'; 
 		$doc->addStyleDeclaration( $style );
 	}
 

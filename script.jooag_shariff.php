@@ -14,8 +14,8 @@ class PlgSystemJooag_shariffInstallerScript
 {
 	public function preflight($type, $parent)
 	{
-		$minPHP = '5.5.0';
-		$minJoomla = '3.5.0';
+		$minPHP = '5.6.0';
+		$minJoomla = '3.6.0';
 		$errorCount = '0';
 	
 		if (!version_compare(PHP_VERSION, $minPHP, 'ge'))
@@ -38,5 +38,10 @@ class PlgSystemJooag_shariffInstallerScript
 		}
 
 		return true;
+	}
+	
+	function postflight( $type, $parent )
+	{
+		echo '<div class="alert alert-danger"><h1 class="alert-heading">Attention! Please read carefully.</h1><div class="alert-message"> This is a security release, with an updated Shariff  Backend Library to prevent a CGI application vulnerability. More Informations here: https://httpoxy.org/ . This is a security release and Because of the big changes in Shariff Backend Library and the Plugin itself, you have to make the settings again.</div></div>';
 	}
 }

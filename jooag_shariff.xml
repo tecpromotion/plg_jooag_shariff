@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.4" type="plugin" method="upgrade" group="system">
+<extension version="3.6" type="plugin" method="upgrade" group="system">
 	<name>PLG_JOOAG_SHARIFF</name>
 	<author>Ufuk Avcu</author>
 	<creationDate>01.10.2015</creationDate>
@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>info@joomla-agentur.de</authorEmail>
 	<authorUrl>www.joomla-agentur.de</authorUrl>
-	<version>3.3.0-Beta1</version>
+	<version>3.3.0-Beta2</version>
 	<description>PLG_JOOAG_SHARIFF_XML_DESCRIPTION</description>
 
 	<scriptfile>script.jooag_shariff.php</scriptfile>
@@ -18,6 +18,7 @@
 		<folder>fields</folder>
 		<folder>js</folder>
 		<folder>language</folder>
+		<filename plugin="jooag_shariff">jooag_shariff-services.xml</filename>
 		<filename plugin="jooag_shariff">jooag_shariff.php</filename>
 		<filename plugin="jooag_shariff">README.md</filename>
 	</files>
@@ -27,144 +28,14 @@
 		<folder>js</folder>
 	</media>
 	
-	<languages>
-		<language tag="en-GB">en-GB/en-GB.plg_system_jooag_shariff.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_system_jooag_shariff.sys.ini</language>
-		<language tag="de-DE">de-DE/de-DE.plg_system_jooag_shariff.ini</language>
-		<language tag="de-DE">de-DE/de-DE.plg_system_jooag_shariff.sys.ini</language>
-	</languages>
-	
 	<config>
 		<fields name="params">
+			
 			<fieldset name="PLG_JOOAG_SHARIFF_SETTINGS" addfieldpath="/plugins/system/jooag_shariff/fields">
 				<field type="jooagsystem" name="jooagsystem" />
-				
-				<field name="twitter_line" type="line" />
-				<field name="twitter" label="PLG_JOOAG_SHARIFF_TWITTER_NAME" type="radio" class="btn-group" default="Twitter" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Twitter">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="twitter_ordering" showon="twitter:Twitter" type="integer" default="1" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="twitter_via" showon="twitter:Twitter" type="input" label="PLG_JOOAG_SHARIFF_TWITTER_VIA"/>
-				
-				<field name="facebook_line" type="line" />
-				<field name="facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_NAME" type="radio" class="btn-group" default="Facebook" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Facebook">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="facebook_ordering" showon="facebook:Facebook" type="integer" default="2" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="fb_secret" showon="facebook:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_SECRET"/>
-				<field name="fb_app_id" showon="facebook:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_APP_ID"/>
-				<field name="spacer_LABEL_FB_API" type="spacer" showon="facebook:Facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_API_DESC" class="alert alert-info" />
-				
-				<field name="googleplus_line" type="line" />
-				<field name="googleplus" label="PLG_JOOAG_SHARIFF_GOOGLE_PLUS_NAME" type="radio" class="btn-group" default="GooglePlus" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="GooglePlus">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="googleplus_ordering" showon="googleplus:GooglePlus" type="integer" default="3" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="linkedin_line" type="line" />
-				<field name="linkedin" label="PLG_JOOAG_SHARIFF_LINKEDIN_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="LinkedIn">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="linkedin_ordering" showon="linkedin:LinkedIn" type="integer" default="4" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="pinterest_line" type="line" />
-				<field name="pinterest" label="PLG_JOOAG_SHARIFF_PINTEREST_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Pinterest">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="pinterest_ordering" showon="pinterest:Pinterest" type="integer" default="5" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="xing_line" type="line" />
-				<field name="xing" label="PLG_JOOAG_SHARIFF_XING_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Xing">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="xing_ordering" showon="xing:Xing" type="integer" default="6" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="whatsapp_line" type="line" />
-				<field name="whatsapp" label="PLG_JOOAG_SHARIFF_WHATSAPP_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Whatsapp">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="whatsapp_ordering" showon="whatsapp:Whatsapp" type="integer" default="7" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field  name="mail_line" type="line" />
-				<field name="mail" label="PLG_JOOAG_SHARIFF_MAIL_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Mail">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="mail_ordering" showon="mail:Mail" type="integer" default="8" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="data_mail_url" showon="mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_RECIPIENT" />
-				<field name="data-mail-subject" showon="mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_SUBJECT" />
-				<field name="data-mail-body" showon="mail:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_BODY" />
-				<field type="spacer" showon="mail:Mail" name="data-mail-spacer" label="PLG_JOOAG_SHARIFF_MAIL_DESC" class="alert alert-error" />
-				
-				<field name="info_line" type="line" />
-				<field name="info" label="PLG_JOOAG_SHARIFF_INFO_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Info">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="info_ordering" showon="info:Info" type="integer" default="9" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="data_info_url" showon="info:Info" type="modal_article" label="PLG_JOOAG_SHARIFF_INFO_BUTTON_ARTICLE"/>
-				<field type="spacer" showon="info:Info" name="spacer_LABEL_INFO_BUTTON" label="PLG_JOOAG_SHARIFF_INFO_DESC"  class="alert alert-info" />
-				
-				<field name="addthis_line" type="line" />
-				<field name="addthis" label="PLG_JOOAG_SHARIFF_ADDTHIS_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Addthis">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="addthis_ordering" showon="addthis:Addthis" type="integer" default="10" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="tumblr_line" type="line" />
-				<field name="tumblr" label="PLG_JOOAG_SHARIFF_TUMBLR_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Tumblr">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="tumblr_ordering" showon="tumblr:Tumblr" type="integer" default="11" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="flattr_line" type="line" />
-				<field name="flattr" label="PLG_JOOAG_SHARIFF_FLATTR_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Flattr">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="flattr_ordering" showon="flattr:Flattr" type="integer" default="12" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="flattr_category" showon="flattr:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_CATEGORY"/>
-				<field name="flattr_user" showon="flattr:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_USER"/>
-				
-				<field name="diaspora_line" type="line" />
-				<field name="diaspora" label="PLG_JOOAG_SHARIFF_DIASPORA_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Diaspora">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="diaspora_ordering" showon="diaspora:Diaspora" type="integer" default="13" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="reddit_line" type="line" />
-				<field name="reddit" label="PLG_JOOAG_SHARIFF_REDDIT_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Reddit">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="reddit_ordering" showon="reddit:Reddit" type="integer" default="14" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="stumbleupon_line" type="line" />
-				<field name="stumbleupon" label="PLG_JOOAG_SHARIFF_STUMBLEUPON_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Stumbleupon">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="stumbleupon_ordering" showon="stumbleupon:Stumbleupon" type="integer" default="15" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				
-				<field name="threema_line" type="line" />
-				<field name="threema" label="PLG_JOOAG_SHARIFF_THREEMA_NAME" type="radio" class="btn-group" default="0" >
-					<option value="0">PLG_JOOAG_SHARIFF_DISABLED</option>
-					<option value="Threema">PLG_JOOAG_SHARIFF_ENABLED</option>
-				</field>
-				<field name="threema_ordering" showon="threema:Threema" type="integer" default="16" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-				<field name="end_line" type="line" />
+				<field name="services" type="subform" formsource="plugins/system/jooag_shariff/jooag_shariff-services.xml" min="0" max="20" multiple="true" layout="joomla.form.field.subform.repeatable-table" groupByFieldset="true" label="Service" description="" />
 			</fieldset>
-			
+
 			<fieldset name="PLG_JOOAG_SHARIFF_OUTPUT">				
 				<field type="line" name="com_content_line" />
 				<field name="com_content" label="PLG_JOOAG_SHARIFF_JOOMLA_CONTENT" type="radio" class="btn-group" default="1" >
