@@ -31,7 +31,7 @@ class PlgSystemJooag_shariffInstallerScript
 			JLog::add($error, JLog::WARNING, 'jerror');
 			$errorCount++;
 		}
-		
+
 		if($errorCount != 0)
 		{
 			return false;
@@ -42,5 +42,6 @@ class PlgSystemJooag_shariffInstallerScript
 	
 	function postflight( $type, $parent )
 	{
+		echo '<div class="alert alert-danger"><h1 class="alert-heading">Attention! Please read carefully.</h1><p>This is a new release, with some big changes. Because of that, you need to activate and setup the Plugin again.</div>';
 	}
 }
