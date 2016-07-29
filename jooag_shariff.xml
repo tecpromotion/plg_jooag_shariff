@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.6" type="plugin" method="upgrade" group="system">
+<extension version="3.6" type="plugin" method="install" group="system">
 	<name>PLG_JOOAG_SHARIFF</name>
 	<author>Ufuk Avcu</author>
 	<creationDate>01.10.2015</creationDate>
@@ -112,8 +112,8 @@
 				<field name="data_url" label="PLG_JOOAG_SHARIFF_DATA_URL" type="list" class="btn-group" default="0" >
 					<option value="0">PLG_JOOAG_SHARIFF_DATA_URL_AUTOMATIC</option>
 					<option value="1">PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM</option>
-					</field>
-				<field name="data_url_custom" showon="data_url:1" type="input" label="PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM_INPUT"/>
+					</field>	
+				<field name="data_url_custom" type="subform" showon="data_url:1" formsource="plugins/system/jooag_shariff/jooag_shariff-customDomains.xml" min="0" max="20" multiple="true" layout="joomla.form.field.subform.repeatable-table" groupByFieldset="true" label="Service" description="" />
 				<field name="data_url_desc" type="spacer" showon="data-url:1" label="PLG_JOOAG_SHARIFF_DATA_URL_CUSTOM_DESC" class="alert alert-info" />
 			</fieldset>	
 		</fields>

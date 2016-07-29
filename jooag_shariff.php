@@ -220,6 +220,11 @@ class plgSystemJooag_Shariff extends JPlugin
 	 **/
 	public function generateHTML($config) //for shorttag
 	{	
+		if(!$this->params->get('services'))
+		{
+			return;
+		}
+		
 		JHtml::_('jquery.framework');
 		$doc = JFactory::getDocument();
 		
@@ -285,7 +290,7 @@ class plgSystemJooag_Shariff extends JPlugin
 		}
 
 		//Services output
-		$html .= ' data-services="'.htmlspecialchars(json_encode((array)array_map('strtolower', $services))).'"';	
+		$html .= ' data-services="'.htmlspecialchars(json_encode(array_map('strtolower', $services))).'"';	
 
 		$html .= '></div>';
 				
@@ -303,16 +308,21 @@ class plgSystemJooag_Shariff extends JPlugin
 		if($table->name == 'PLG_JOOAG_SHARIFF')
 		{
 			$params = json_decode($table->params);
-		
+
 			if($params->data_url == 0)
 			{
-				$json->domains = JURI::getInstance()->getHost();
+				$json->domains = (array)JURI::getInstance()->getHost();
 			}
 			else
 			{
-				$json->domains = $params->data_url_custom;
+				
+				foreach($params->data_url_custom as $domain)
+				{
+					$json->domains[] = $domain->custom_domains;				
+				}
+				
 			}
-			
+
 			$services = array('GooglePlus','Facebook','LinkedIn','Reddit','StumbleUpon','Flattr','Pinterest','Xing','AddThis');
 			
 			foreach($params->services as $service)
