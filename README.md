@@ -1,6 +1,6 @@
-<h1>Joomla 3.6+ Shariff Plugin</h1>
+<h1>Joomla 3 Shariff Plugin</h1>
 <h3>The 1-Click-Social-Button with privacy in mind</h3>
-This Joomla 3.6+ Plugin utilizes Heise Shariff Library to enable website users to share their favorite content without compromising their privacy.
+This Joomla 3 Plugin utilizes Heise Shariff Library to enable website users to share their favorite content without compromising their privacy.
 
 <b>System Requirements:</b>
 * Joomla 3.6+ 
