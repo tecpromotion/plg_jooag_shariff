@@ -17,7 +17,7 @@ class PlgSystemJooag_shariffInstallerScript
 		$minPHP = '5.6.0';
 		$minJoomla = '3.6.0';
 		$errorCount = '0';
-	
+		
 		if (!version_compare(PHP_VERSION, $minPHP, 'ge'))
 		{
 			$error = "<p>You need PHP $minPHP or later to install this extension!<br/>Actual PHP Version:".PHP_VERSION."</p>";
@@ -42,6 +42,5 @@ class PlgSystemJooag_shariffInstallerScript
 	
 	function postflight( $type, $parent )
 	{
-		echo '<div class="alert alert-danger"><h1 class="alert-heading">Attention! Please read carefully.</h1><div class="alert-message"> This is a security release, with an updated Shariff  Backend Library to prevent a CGI application vulnerability. More Informations here: https://httpoxy.org/ . This is a security release and Because of the big changes in Shariff Backend Library and the Plugin itself, you have to make the settings again.</div></div>';
 	}
 }
