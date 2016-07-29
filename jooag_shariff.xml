@@ -34,6 +34,7 @@
 			
 			<fieldset name="PLG_JOOAG_SHARIFF_SETTINGS" addfieldpath="/plugins/system/jooag_shariff/fields">
 				<field type="jooagsystem" name="jooagsystem" />
+				<field type="spacer" name="services_desc" label="PLG_JOOAG_SHARIFF_SERVICES_ATTENTION" class="alert alert-danger" />
 				<field name="services" type="subform" formsource="plugins/system/jooag_shariff/jooag_shariff-services.xml" min="0" max="20" multiple="true" layout="joomla.form.field.subform.repeatable-table" groupByFieldset="true" label="Service" description="" />
 			</fieldset>
 

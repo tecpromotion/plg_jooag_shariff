@@ -33,7 +33,7 @@
 		<field name="fb_app_id" showon="services:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_APP_ID"/>
 		<field name="spacer_LABEL_FB_API" type="spacer" showon="services:Facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_API_DESC" class="alert alert-info" />
 		
-		<field name="data_mail_url" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_RECIPIENT" />
+		<field name="data_mail_url" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_URL" />
 		<field name="data_mail_subject" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_SUBJECT" />
 		<field name="data_mail_body" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_BODY" />
 		<field type="spacer" showon="services:Mail" name="data-mail-spacer" label="PLG_JOOAG_SHARIFF_MAIL_DESC" class="alert alert-error" />

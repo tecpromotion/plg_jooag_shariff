@@ -191,8 +191,8 @@ class plgSystemJooag_Shariff extends JPlugin
 	private function getAccessComContent($context, $article)
 	{
 		$access = 0;
-		$context = explode('.', $context);
-		if($this->params->get('com_content') == 1 and $context[0] == 'com_content')
+
+		if($this->params->get('com_content') == 1 and $context == 'com_content.article')
 		{
 			$catIds = (array)$this->params->get('com_content_category_select');
 			$this->params->get('com_content_category_assignment') == 0 ? $access = 0 : '';
@@ -218,7 +218,7 @@ class plgSystemJooag_Shariff extends JPlugin
 	/**
 	 * Shariff output generation
 	 **/
-	public function generateHTML($config) //for shorttag
+	public function generateHTML($config)
 	{	
 		if(!$this->params->get('services'))
 		{
@@ -250,7 +250,8 @@ class plgSystemJooag_Shariff extends JPlugin
 		$html .= ' data-lang="'.explode("-", JFactory::getLanguage()->getTag())[0].'"';
 		$html .= (array_key_exists('orientation', $config)) ? ' data-orientation="'.$config['orientation'].'"' : ' data-orientation="'.$this->params->get('data_orientation').'"';
 		$html .= (array_key_exists('theme', $config)) ? ' data-theme="'.$config['theme'].'"' : ' data-theme="'.$this->params->get('data_theme').'"';		
-	
+		
+
 		
 		foreach($this->params->get('services') as $service)
 		{
@@ -272,8 +273,7 @@ class plgSystemJooag_Shariff extends JPlugin
 
 			if($service->services == 'Mail')
 			{
-
-				$html .= ($service->data_mail_url) ? ' data-mail-url="mailto:'.$service->data_mail_url.'"' : '';
+				$html .= ($service->data_mail_url) ? ' data-mail-url="'.$service->data_mail_url.'"' : '';
 				$html .= ($service->data_mail_subject) ? ' data-mail-subject="'.$service->data-mail-subject.'"' : '';
 				$html .= ($service->data_mail_body) ? ' data-mail-body="'.$service->data-mail-body.'"' : '';
 			}
