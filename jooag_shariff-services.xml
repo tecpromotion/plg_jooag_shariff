@@ -4,46 +4,44 @@
 		<field name="services" type="list" class="advancedSelect" label="Select a Service" multiple="false">
 			<option value="">Please s a service</option>
 
-			<option value="facebook">facebook</option>
-			<option value="twitter">twitter</option>
-			<option value="googleplus">googleplus</option>
-			<option value="linkedin">linkedin</option>
-			<option value="pinterest">pinterest</option>
-			<option value="xing">xing</option>
-			<option value="whatsapp">whatsapp</option>
-			<option value="mail">mail</option>
-			<option value="info">info</option>
-			<option value="addthis">addthis</option>
-			<option value="tumblr">tumblr</option>
-			<option value="flattr">flattr</option>
-			<option value="diaspora">diaspora</option>
-			<option value="reddit">reddit</option>
-			<option value="stumbleupon">stumbleupon</option>
-			<option value="threema">threema</option>
-			<option value="weibo">weibo</option>
-			<option value="tencent-weibo">tencent-weibo</option>
-			<option value="qzone">qzone</option>
+			<option value="Facebook">Facebook</option>
+			<option value="Twitter">Twitter</option>
+			<option value="GooglePlus">GooglePlus</option>
+			<option value="LinkedIn">LinkedIn</option>
+			<option value="Pinterest">Pinterest</option>
+			<option value="Xing">Xing</option>
+			<option value="Whatsapp">Whatsapp</option>
+			<option value="Mail">Mail</option>
+			<option value="Info">Info</option>
+			<option value="AddThis.counter">AddThis</option>
+			<option value="Tumblr">Tumblr</option>
+			<option value="Flattr">Flattr</option>
+			<option value="Diaspora">Diaspora</option>
+			<option value="Reddit">Reddit</option>
+			<option value="StumbleUpon">StumbleUpon</option>
+			<option value="Threema">Threema</option>
+			<option value="Weibo">Weibo</option>
+			<option value="Tencent-weibo">Tencent-weibo</option>
+			<option value="Qzone">Qzone</option>
 		</field>
 	</fieldset>
 	
 	<fieldset name="section2" label="General">
 		<field name="twitter_via" class="advancedSelect" showon="services:twitter" type="input" label="PLG_JOOAG_SHARIFF_TWITTER_VIA"/>
 		
-		<field name="fb_secret" showon="services:facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_SECRET"/>
-		<field name="fb_app_id" showon="services:facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_APP_ID"/>
-		<field name="spacer_LABEL_FB_API" type="spacer" showon="services:facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_API_DESC" class="alert alert-info" />
+		<field name="fb_secret" showon="services:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_SECRET"/>
+		<field name="fb_app_id" showon="services:Facebook" type="input" label="PLG_JOOAG_SHARIFF_FACEBOOK_APP_ID"/>
+		<field name="spacer_LABEL_FB_API" type="spacer" showon="services:Facebook" label="PLG_JOOAG_SHARIFF_FACEBOOK_API_DESC" class="alert alert-info" />
 		
-		<field name="data_mail_url" showon="services:mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_RECIPIENT" />
-		<field name="data_mail_subject" showon="services:mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_SUBJECT" />
-		<field name="data_mail_body" showon="services:mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_BODY" />
-		<field type="spacer" showon="services:mail" name="data-mail-spacer" label="PLG_JOOAG_SHARIFF_MAIL_DESC" class="alert alert-error" />
+		<field name="data_mail_url" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_RECIPIENT" />
+		<field name="data_mail_subject" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_SUBJECT" />
+		<field name="data_mail_body" showon="services:Mail" type="input" label="PLG_JOOAG_SHARIFF_MAIL_BODY" />
+		<field type="spacer" showon="services:Mail" name="data-mail-spacer" label="PLG_JOOAG_SHARIFF_MAIL_DESC" class="alert alert-error" />
 		
-		<field name="info_ordering" showon="services:info" type="integer" default="9" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-		<field name="data_info_url" showon="services:info" type="modal_article" label="PLG_JOOAG_SHARIFF_INFO_BUTTON_ARTICLE"/>
-		<field type="spacer" showon="services:info" name="spacer_LABEL_INFO_BUTTON" label="PLG_JOOAG_SHARIFF_INFO_DESC"  class="alert alert-info" />
+		<field name="data_info_url" showon="services:Info" type="modal_article" label="PLG_JOOAG_SHARIFF_INFO_BUTTON_ARTICLE"/>
+		<field type="spacer" showon="services:Info" name="spacer_LABEL_INFO_BUTTON" label="PLG_JOOAG_SHARIFF_INFO_DESC"  class="alert alert-info" />
 		
-		<field name="flattr_ordering" showon="services:flattr" type="integer" default="12" label="PLG_JOOAG_SHARIFF_ORDERING" first="1" last="20" step="1" />
-		<field name="flattr_category" showon="services:flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_CATEGORY"/>
-		<field name="flattr_user" showon="services:flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_USER"/>		
+		<field name="flattr_category" showon="services:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_CATEGORY"/>
+		<field name="flattr_user" showon="services:Flattr" type="input" label="PLG_JOOAG_SHARIFF_FLATTR_USER"/>		
 	</fieldset>
 </form>

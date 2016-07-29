@@ -1,7 +1,6 @@
-<h1>Joomla 3.5+ Shariff Plugin</h1>
-<h2>Now with PHP7 Support</h2>
-<h3>The 1-Click-Social-Button with privacy in mind and can speed up your site</h3>
-This Joomla 3.4+ Plugin utilizes Heise Shariff Library to enable website users to share their favorite content without compromising their privacy. A good side-effect of this implentation is a faster loading time for your website, because the user need no direct connection to get the shares from services like Facebook.
+<h1>Joomla 3.4+ Shariff Plugin</h1>
+<h3>The 1-Click-Social-Button with privacy in mind</h3>
+This Joomla 3.4+ Plugin utilizes Heise Shariff Library to enable website users to share their favorite content without compromising their privacy.
 
 <b>System Requirements:</b>
 Joomla 3.4+ and PHP 5.5+ for the Share Counter
@@ -33,15 +32,13 @@ Joomla 3.4+ and PHP 5.5+ for the Share Counter
 - [x] v3.2.8 - New: AddThis button
 - [x] v3.2.9 - New: tumblr button
 - [ ] v3.3 - Integration for more Componentes e.g. Zoo, K2, SobiPro, Seblod, JoomGallery
-- [ ] v3.4 - Overhaul the output
+- [ ] v3.4 - Overhaul the output and allow multiple instances
 - [ ] v3.5 - Maybe shorttag parameter support for custom icons, backend integration and other shariff settings
 - [ ] v3.6 - Rearrange the Plugin Options and simplify settings
 - [ ] v3.x - Ongoing integration of updates from Shariff Libraray & Backend
 - [ ] v3.x - If you have a good idea, maybe this is the next v3.x
 
 <h2>Update Instructions:</h2>
-* V3.2.x -> V3.3.0
-  * All Plugin Settings need to be revisited. 
 * V3.1.x -> V3.2.x
   * Everything fine! Nothing todo.
 * V3.0.6 -> V3.1.x
@@ -53,15 +50,6 @@ Joomla 3.4+ and PHP 5.5+ for the Share Counter
   * Not so important to delete this folder. It's not needed anymore, because we use the Joomla Core Cache folder.
 * Before V3.0.0 Stable
   * Delete the old Plugin and install the new one
-
-<h2>Installation and Usage:</h2>
-* Download the latest Stable release here: https://github.com/joomla-agency/plg_jooag_shariff/releases
-* Install it via the Joomla Installer: https://docs.joomla.org/Installing_an_extension
-* Go to Joomla Backend -> Extensions -> Plugins -> JooAg Shariff
-* Activate the Plugin
-* Go through all settings and setup the plugin
-* Now visit the Frontend and you should see the Plugin in action
-* If not, please post here the Bug: https://github.com/joomla-agency/plg_jooag_shariff/issues
 
 <h2>Documentation:</h2>
 <h4>Share Counter:</h4>

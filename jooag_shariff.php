@@ -108,13 +108,6 @@ class plgSystemJooag_Shariff extends JPlugin
 	{		
 		$app = JFactory::getApplication();
 		
-		
-		/*
-		echo '<pre>';
-		print_r($this->params->get('services-test'));
-		echo '</pre>';
-		*/
-		
 		if(preg_match_all('/{shariff\ ([^}]+)\}|\{shariff\}/', $article->text, $matches) and $app->isSite() and $this->getAccessGeneral('com_shorttag', $article, 'top') == 1)
 		{
 			$params = explode(' ', trim($matches[0][0],'}'));
@@ -198,8 +191,8 @@ class plgSystemJooag_Shariff extends JPlugin
 	private function getAccessComContent($context, $article)
 	{
 		$access = 0;
-
-		if($this->params->get('com_content') == 1 and $context == 'com_content.article')
+		$context = explode('.', $context);
+		if($this->params->get('com_content') == 1 and $context[0] == 'com_content')
 		{
 			$catIds = (array)$this->params->get('com_content_category_select');
 			$this->params->get('com_content_category_assignment') == 0 ? $access = 0 : '';
@@ -261,18 +254,18 @@ class plgSystemJooag_Shariff extends JPlugin
 				$services[] = $service->services;
 			}
 			
-			if($service->services == 'twitter')
+			if($service->services == 'Twitter')
 			{
 				$html .= ($this->params->get('shariff_twitter_via')) ? ' data-twitter-via="'.$service->shariff_twitter_via.'"' : '';
 			}
 			
-			if($service->services == 'flattr')
+			if($service->services == 'Flattr')
 			{	
 				$html .= ($this->params->get('shariff_flattr_category')) ? ' data-flattr-category="'.$service->shariff_flattr_category.'"' : '';
 				$html .= ($this->params->get('shariff_flattr_user')) ? ' data-flattr-user="'.$service->shariff_flattr_user.'"' : '';
 			}
 
-			if($service->services == 'mail')
+			if($service->services == 'Mail')
 			{
 
 				$html .= ($service->data_mail_url) ? ' data-mail-url="mailto:'.$service->data_mail_url.'"' : '';
@@ -280,7 +273,7 @@ class plgSystemJooag_Shariff extends JPlugin
 				$html .= ($service->data_mail_body) ? ' data-mail-body="'.$service->data-mail-body.'"' : '';
 			}
 			
-			if($service->services == 'info' and (int)$service->data_info_url)
+			if($service->services == 'Info' and $service->data_info_url)
 			{
 				jimport('joomla.database.table');
 				$item =	JTable::getInstance("content");
@@ -292,7 +285,7 @@ class plgSystemJooag_Shariff extends JPlugin
 		}
 
 		//Services output
-		$html .= ' data-services="'.htmlspecialchars(json_encode((array)$services)).'"';	
+		$html .= ' data-services="'.htmlspecialchars(json_encode((array)array_map('strtolower', $services))).'"';	
 
 		$html .= '></div>';
 				
@@ -310,41 +303,47 @@ class plgSystemJooag_Shariff extends JPlugin
 		if($table->name == 'PLG_JOOAG_SHARIFF')
 		{
 			$params = json_decode($table->params);
-			
-			if($this->params->get('data_url') == 0){$data->domains = JURI::getInstance()->getHost();}
-			if($this->params->get('data_url') == 1){$data->domains = $this->params->get('data_url_custom');}
-
-			$services = array('googleplus','facebook','linkedin','reddit','stumbleupon','flattr','pinterest','xing','addthis');
-			
-			foreach($this->params->get('services') as $service)
+		
+			if($params->data_url == 0)
 			{
-				$data->services[] = $service->services;
+				$json->domains = JURI::getInstance()->getHost();
+			}
+			else
+			{
+				$json->domains = $params->data_url_custom;
+			}
+			
+			$services = array('GooglePlus','Facebook','LinkedIn','Reddit','StumbleUpon','Flattr','Pinterest','Xing','AddThis');
+			
+			foreach($params->services as $service)
+			{
+				$json->services[] = $service->services;
 			}
 			
 			//Delete unused services
-			$data->services = array_intersect($services, $data->services);
+			$json->services = array_intersect($services, $json->services);
 			
 			if($params->fb_app_id and $params->fb_secret)
 			{
-				$data->Facebook->app_id = $params->fb_app_id;
-				$data->Facebook->secret = $params->fb_secret;
+				$json->Facebook->app_id = $params->fb_app_id;
+				$json->Facebook->secret = $params->fb_secret;
 			}
 
-			$data->cache->cacheDir = JPATH_SITE.'/cache/plg_jooag_shariff';
-			$data->cache->ttl = $params->cache_time;
-			$data->client->timeout = $params->client_timeout;
+			$json->cache->cacheDir = JPATH_SITE.'/cache/plg_jooag_shariff';
+			$json->cache->ttl = $params->cache_time;
+			$json->client->timeout = $params->client_timeout;
 			
 			if($params->cache)
 			{
-				$data->cache->adapter = $params->cache_handler;
+				$json->cache->adapter = $params->cache_handler;
 
 				if($params->cache_handler == 'file'){
-					$data->cache->adapter = 'filesystem';
+					$json->cache->adapter = 'filesystem';
 				}
 			}
 
-			$data = json_encode($data, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-			JFile::write(JPATH_PLUGINS . '/system/jooag_shariff/backend/shariff.json', $data);
+			$json = json_encode($json, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+			JFile::write(JPATH_PLUGINS . '/system/jooag_shariff/backend/shariff.json', $json);
 		}
 	}
 }

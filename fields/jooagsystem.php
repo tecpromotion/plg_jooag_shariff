@@ -59,6 +59,7 @@ class JFormFieldJooagsystem extends JFormField
 		$style .= '.subform-repeatable-group > td{padding:0px 8px;}'; 
 		$style .= '.subform-repeatable-group .control-group {margin:6px 0;}'; 
 		$style .= '.subform-repeatable-group td:nth-child(2) .control-group{display:none;}'; 
+		$style .= 'div#attrib-PLG_JOOAG_SHARIFF_SETTINGS .controls{margin-left:0;}'; 
 		$doc->addStyleDeclaration( $style );
 	}
 
