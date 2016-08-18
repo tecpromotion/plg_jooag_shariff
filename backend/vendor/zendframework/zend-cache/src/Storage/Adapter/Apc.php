@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -44,6 +44,10 @@ class Apc extends AbstractAdapter implements
      */
     public function __construct($options = null)
     {
+        if (!extension_loaded('apc')) {
+            throw new Exception\ExtensionNotLoadedException('Missing ext/apc');
+        }
+
         $enabled = ini_get('apc.enabled');
         if (PHP_SAPI == 'cli') {
             $enabled = $enabled && (bool) ini_get('apc.enable_cli');
@@ -250,7 +254,7 @@ class Apc extends AbstractAdapter implements
         // remove namespace prefix
         $prefixL = strlen($prefix);
         $result  = [];
-        foreach ($fetch as $internalKey => & $value) {
+        foreach ($fetch as $internalKey => $value) {
             $result[substr($internalKey, $prefixL)] = $value;
         }
 
@@ -428,9 +432,9 @@ class Apc extends AbstractAdapter implements
 
         $prefix                = $namespace . $options->getNamespaceSeparator();
         $internalKeyValuePairs = [];
-        foreach ($normalizedKeyValuePairs as $normalizedKey => &$value) {
+        foreach ($normalizedKeyValuePairs as $normalizedKey => $value) {
             $internalKey = $prefix . $normalizedKey;
-            $internalKeyValuePairs[$internalKey] = &$value;
+            $internalKeyValuePairs[$internalKey] = $value;
         }
 
         $failedKeys = apc_store($internalKeyValuePairs, null, $options->getTtl());
