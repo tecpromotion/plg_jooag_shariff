@@ -16,11 +16,12 @@ class Application
      */
     private static $configuration = [
         'cache' => [
-            'ttl' => 60
+            'ttl' => 60,
+            'cacheDir' => '/home/webwze6un/html/jug-hamburg.de/cache/plg_jooag_shariff'
         ],
         'domains' => [
-            'www.heise.de',
-            'www.ct.de'
+            'jug-hamburg.de',
+            'www.jug-hamburg.de'
         ],
         'services' => [
             'GooglePlus',
@@ -37,11 +38,14 @@ class Application
 
     public static function run()
     {
+        $file = file_get_contents(__DIR__ . '/shariff.json');
+        $config = json_decode($file, true);
+
         header('Content-type: application/json');
 
         $url = isset($_GET['url']) ? $_GET['url'] : '';
         if ($url) {
-            $shariff = new Backend(self::$configuration);
+            $shariff = new Backend($config);
             echo json_encode($shariff->get($url));
         } else {
             echo json_encode(null);
