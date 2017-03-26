@@ -9,33 +9,6 @@ use Heise\Shariff\Backend;
  */
 class Application
 {
-    /**
-     * Sample configuration
-     *
-     * @var array
-     */
-    private static $configuration = [
-        'cache' => [
-            'ttl' => 60,
-            'cacheDir' => '/home/webwze6un/html/jug-hamburg.de/cache/plg_jooag_shariff'
-        ],
-        'domains' => [
-            'jug-hamburg.de',
-            'www.jug-hamburg.de'
-        ],
-        'services' => [
-            'GooglePlus',
-            'Facebook',
-            'LinkedIn',
-            'Reddit',
-            'StumbleUpon',
-            'Flattr',
-            'Pinterest',
-            'Xing',
-            'AddThis'
-        ]
-    ];
-
     public static function run()
     {
         $file = file_get_contents(__DIR__ . '/shariff.json');
