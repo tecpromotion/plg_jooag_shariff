@@ -4,7 +4,7 @@ This Joomla 3 Plugin utilizes Heise Shariff Library to enable website users to s
 
 <b>System Requirements:</b>
 * Joomla 3.6+ 
-* PHP 5.6 or 7 (if you use the Counter)
+* PHP 5.6, 7 or 7.1 (if you use the Counter)
 
 <b>Plugin features:</b>
 * Joomla Update integration
@@ -32,12 +32,10 @@ This Joomla 3 Plugin utilizes Heise Shariff Library to enable website users to s
 - [x] v3.2.5 - Check the Joomla and PHP Version and prevent the installation if not the requirements met
 - [x] v3.2.8 - New: AddThis button
 - [x] v3.2.9 - New: tumblr button
-- [ ] v3.3 - Integration for more Componentes e.g. Zoo, K2, SobiPro, Seblod, JoomGallery
-- [ ] v3.4 - Overhaul the output and allow multiple instances
-- [ ] v3.5 - Maybe shorttag parameter support for custom icons, backend integration and other shariff settings
-- [ ] v3.6 - Rearrange the Plugin Options and simplify settings
-- [ ] v3.x - Ongoing integration of updates from Shariff Libraray & Backend
-- [ ] v3.x - If you have a good idea, maybe this is the next v3.x
+- [x] v3.3.0 - Shorttag parameter support for custom icons, backend integration and other shariff settings
+- [x] v3.3.0 - Rearrange the Plugin Options and simplify settings
+- [ ] Ongoing integration of updates from Shariff Libraray & Backend
+- [ ] Integration for more Componentes e.g. Zoo, K2, SobiPro, Seblod, JoomGallery
 
 <h2>Update Instructions:</h2>
 * Alle previous versions before 3.3
@@ -105,11 +103,21 @@ RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
  * horizontal
  * vertical
  
-
-
 <h2>Credits:</h2>
 Developed by http://joomla-agentur.de
 
 Thanks to Heise.de for this development https://github.com/heiseonline/shariff
 
 and for Joomla User Group Hamburg http://jug-hamburg.de/ (the main reason for this plugin :-)
+
+<h2>Many thanks for your help and support!</h2>
+
+* David Yardin - https://www.djumla.de/
+
+* Robert Deutz - http://rdbs.de/
+
+* Tobias Zulauf - https://www.jah-tz.de/
+
+* Viktor Vogel - https://joomla-extensions.kubik-rubik.de/
+
+* Yves Hoppe - https://compojoom.com/
