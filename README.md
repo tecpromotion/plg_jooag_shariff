@@ -112,7 +112,7 @@ and for Joomla User Group Hamburg http://jug-hamburg.de/ (the main reason for th
 
 <h2>Many thanks for your help and support!</h2>
 
-* David Yardin - https://www.djumla.de/
+* David Jardin - https://www.djumla.de/
 
 * Robert Deutz - http://rdbs.de/
 
